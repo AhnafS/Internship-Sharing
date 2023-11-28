@@ -1,8 +1,8 @@
-import {
-  getAuth as getClientAuth,
+const {
+  getAuth: getClientAuth,
   signInWithEmailAndPassword,
-} from "firebase/auth";
-import { getAuth as getAdminAuth } from "firebase-admin/auth";
+} = require("firebase/auth");
+const { getAuth: getAdminAuth } = require("firebase-admin/auth");
 
 async function login(req, res) {
   const { email, password } = req.body;
@@ -29,4 +29,4 @@ async function login(req, res) {
   }
 }
 
-export default login;
+module.exports = login;

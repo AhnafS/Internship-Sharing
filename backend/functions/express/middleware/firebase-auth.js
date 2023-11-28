@@ -1,4 +1,4 @@
-import { getAuth } from "firebase-admin/auth";
+const { getAuth } = require("firebase-admin/auth");
 
 async function firebaseAuth(req, res, next) {
   const regex = /Bearer (.+)/i;
@@ -11,4 +11,4 @@ async function firebaseAuth(req, res, next) {
   }
 }
 
-export default firebaseAuth;
+module.exports = firebaseAuth;

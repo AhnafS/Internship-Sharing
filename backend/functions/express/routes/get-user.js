@@ -1,4 +1,4 @@
-import { firestore } from "../../firebaseModule.js";
+const firestore = require("firebase-admin").firestore();
 
 async function getUser(req, res) {
   const userId = req.params.id;
@@ -21,4 +21,4 @@ async function getUser(req, res) {
   res.status(200).json({ secureNote: user.secureNote });
 }
 
-export default getUser;
+module.exports = getUser;

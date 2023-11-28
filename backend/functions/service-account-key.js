@@ -1,4 +1,4 @@
-export default {
+module.exports = {
   type: "service_account",
   project_id: "internship-sharing",
   private_key_id: "c4544b2160f4e6676dc0dd1f4194de033d76f08a",

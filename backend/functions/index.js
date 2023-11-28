@@ -1,30 +1,29 @@
-import functions from "firebase-functions";
-import express from "express";
-import admin from "firebase-admin";
-import validateEmailandPassword from "./express/middleware/validate-email-and-password.js";
-import firebaseConfig from "./firebase.config.js";
-import pkg from "firebase-admin";
-const { initializeApp } = pkg;
-import cors from "cors";
-import morgan from "morgan";
-import serviceAccount from "./service-account-key.js";
+const functions = require("firebase-functions");
+const express = require("express");
+const admin = require("firebase-admin");
+const validateEmailAndPassword = require("./express/middleware/validate-email-and-password");
+const firebaseConfig = require("./firebase.config");
+const { initializeApp } = require("firebase/app");
+const cors = require("cors");
+const morgan = require("morgan");
+const serviceAccount = require("./service-account-key.js");
 
 admin.initializeApp({
   credential: admin.credential.cert(serviceAccount),
 });
 initializeApp(firebaseConfig);
 
-import register from "./express/routes/register.js";
-import login from "./express/routes/login.js";
-import firebaseAuth from "./express/middleware/firebase-auth.js";
-import getUser from "./express/routes/get-user.js";
+const register = require("./express/routes/register");
+const login = require("./express/routes/login");
+const firebaseAuth = require("./express/middleware/firebase-auth");
+const getUser = require("./express/routes/get-user");
 
 const app = express();
 app.use(cors());
 app.use(morgan("dev"));
 
-app.post("/login", validateEmailandPassword, login);
-app.post("/register", validateEmailandPassword, register);
+app.post("/login", validateEmailAndPassword, login);
+app.post("/register", validateEmailAndPassword, register);
 app.get("/users/:id", firebaseAuth, getUser);
 
-export const api = functions.https.onRequest(app);
+exports.api = functions.https.onRequest(app);

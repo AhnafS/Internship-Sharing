@@ -1,7 +1,6 @@
-import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
-import { getAuth as getAdminAuth } from "firebase-admin/auth";
-import { admin } from "firebase-admin";
-const firestore = admin.firestore();
+const { getAuth, createUserWithEmailAndPassword } = require("firebase/auth");
+const { getAuth: getAdminAuth } = require("firebase-admin/auth");
+const firestore = require("firebase-admin").firestore();
 
 async function register(req, res) {
   const { email, password, secureNote } = req.body;
@@ -36,4 +35,4 @@ async function register(req, res) {
   }
 }
 
-export default register;
+module.exports = register;

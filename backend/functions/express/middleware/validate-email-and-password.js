@@ -1,6 +1,6 @@
-import isEmail from "is-email";
+const isEmail = require("is-email");
 
-const validateEmailandPassword = (req, res, next) => {
+const validateEmailAndPassword = (req, res, next) => {
   const { email, password } = req.body;
 
   if (!email) {
@@ -21,4 +21,4 @@ const validateEmailandPassword = (req, res, next) => {
   next();
 };
 
-export default validateEmailandPassword;
+module.exports = validateEmailAndPassword;

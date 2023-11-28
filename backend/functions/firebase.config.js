@@ -1,4 +1,4 @@
-export default {
+module.exports = {
   apiKey: "AIzaSyASU1rFFCVj2ZTSAhuKhK4HkSCIsFpQC-A",
   authDomain: "internship-sharing.firebaseapp.com",
   projectId: "internship-sharing",
