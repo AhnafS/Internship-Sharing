@@ -3,10 +3,12 @@ import { Outlet, Link } from "react-router-dom";
 import "../styles/Layout.css";
 import Slider from "@mui/material/Slider";
 import Box from "@mui/material/Box";
+import { useAuth } from "../auth";
 
 const Layout = () => {
   const [isNavActive, setIsNavActive] = useState(false);
   const [sliderValue, setSliderValue] = useState(10);
+  const { signOut } = useAuth();
 
   return (
     <div>
@@ -36,6 +38,9 @@ const Layout = () => {
           </li>
           <li>
             <a href="#"> Contact</a>
+          </li>
+          <li>
+            <button onClick={signOut}>Sing out</button>
           </li>
         </ul>
         {isNavActive && (

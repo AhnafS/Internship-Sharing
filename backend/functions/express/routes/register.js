@@ -25,6 +25,7 @@ async function register(req, res) {
     if (code === "auth/email-already-in-use") {
       res.status(400);
     } else {
+      console.log(err);
       res.status(500);
     }
     res.json({

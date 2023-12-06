@@ -1,7 +1,7 @@
 import axios from "axios";
 import { CLOUD_FUNCTIONS_ORIGIN } from "./functions-origin";
 
-const apiUrl = `${CLOUD_FUNCTIONS_ORIGIN}/api`;
+const apiUrl = `${CLOUD_FUNCTIONS_ORIGIN}`;
 
 export async function signIn({ email, password }) {
   const url = `${apiUrl}/login`;
@@ -10,12 +10,15 @@ export async function signIn({ email, password }) {
 }
 
 export async function signUp({ email, password, secureNote }) {
+  console.log("It came here api-services");
   const url = `${apiUrl}/register`;
+  console.log(url);
   const res = await axios.post(url, {
     email,
     password,
     secureNote,
   });
+  console.log(res);
   return res.data;
 }
 

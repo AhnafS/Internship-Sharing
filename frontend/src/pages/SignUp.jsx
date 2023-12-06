@@ -29,8 +29,9 @@ export default function SignUp() {
     setIsSigningUp(true);
     setErrorMessage(undefined);
     try {
+      console.log("It came here");
       await signUp({ email, password, secureNote });
-      navigate("/");
+      navigate("/home");
     } catch (error) {
       const res = error.response;
       if (res) {

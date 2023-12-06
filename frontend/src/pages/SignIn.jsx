@@ -28,7 +28,7 @@ export default function SignIn() {
     setErrorMessage(undefined);
     try {
       await signIn({ email, password });
-      navigate("/");
+      navigate("/home");
     } catch (error) {
       const res = error.response;
       if (res) {
