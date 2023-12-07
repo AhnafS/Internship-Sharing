@@ -19,12 +19,15 @@ async function register(req, res) {
     const adminAuth = getAdminAuth();
     const token = await adminAuth.createCustomToken(credential.user.uid);
     await firestore.doc(`users/${credential.user.uid}`).set({ secureNote });
+    await firestore.doc(`internships/${email}`).set({ internshipArray: [] });
     res.status(201).json({ token });
   } catch (err) {
     const { code } = err;
     if (code === "auth/email-already-in-use") {
       res.status(400);
+      console.log(err);
     } else {
+      console.log(err);
       console.log(err);
       res.status(500);
     }

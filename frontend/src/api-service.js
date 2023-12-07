@@ -31,3 +31,19 @@ export async function getUserData({ userIdToken, userId }) {
   });
   return res.data;
 }
+
+export async function getInternships(email) {
+  const url = `${apiUrl}/get-internships/${email}`;
+  const res = await axios.get(url);
+  console.log(res);
+  return res.data;
+}
+
+export async function addInternship(email, internshipDetails) {
+  const url = `${apiUrl}/add-internship`;
+  const res = await axios.post(url, {
+    email,
+    internshipDetails,
+  });
+  return res.data;
+}
