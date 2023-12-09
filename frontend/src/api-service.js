@@ -33,17 +33,41 @@ export async function getUserData({ userIdToken, userId }) {
 }
 
 export async function getInternships(email) {
+  // Check if email is defined
+  while (!email) {
+    // Wait for a short period before checking again
+    await new Promise((resolve) => setTimeout(resolve, 1000)); // Adjust the delay as needed
+  }
+
   const url = `${apiUrl}/get-internships/${email}`;
-  const res = await axios.get(url);
-  console.log(res);
-  return res.data;
+
+  try {
+    const res = await axios.get(url);
+    console.log(res);
+    return res.data;
+  } catch (error) {
+    console.error("Error fetching internships:", error);
+  }
 }
 
 export async function addInternship(email, internshipDetails) {
+  // Check if email is defined
+  while (!email) {
+    // Wait for a short period before checking again
+    await new Promise((resolve) => setTimeout(resolve, 1000)); // Adjust the delay as needed
+  }
+
   const url = `${apiUrl}/add-internship`;
-  const res = await axios.post(url, {
-    email,
-    internshipDetails,
-  });
-  return res.data;
+
+  try {
+    const res = await axios.post(url, {
+      email,
+      internshipDetails,
+    });
+    return res.data;
+  } catch (error) {
+    console.error("Error adding internship:", error);
+    // Handle the error accordingly (e.g., throw, return a default value, etc.)
+    console.log(error);
+  }
 }

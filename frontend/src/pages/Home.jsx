@@ -7,6 +7,7 @@ import { createTheme, ThemeProvider, styled } from "@mui/material/styles";
 import { TextField, Typography } from "@mui/material";
 import { useAuth } from "../auth";
 import { addInternship, getInternships } from "../api-service";
+import ApplicationCard from "../components/ApplicationCard";
 
 const Item = styled(Paper)(({ theme }) => ({
   ...theme.typography.body2,
@@ -16,7 +17,7 @@ const Item = styled(Paper)(({ theme }) => ({
   lineHeight: "60px",
 }));
 
-const ApplicationForm = () => {
+const ApplicationForm = ({ addInternshipHandler }) => {
   const [formData, setFormData] = useState({
     companyName: "",
     companyPosition: "",
@@ -32,7 +33,14 @@ const ApplicationForm = () => {
   const handleSubmit = (event) => {
     event.preventDefault();
     // Handle form submission logic here
-    console.log("Form Data:", formData);
+    addInternshipHandler(formData);
+    setFormData({
+      companyName: "",
+      companyPosition: "",
+      applicationLink: "",
+      whenApplied: "",
+      status: "",
+    });
   };
 
   return (
@@ -90,11 +98,33 @@ const Home = () => {
   const { user, loading } = useAuth();
 
   useEffect(() => {
-    getInternships(user?.email).then((res) => setAllInternships(res));
+    const fillInternshipState = async () => {
+      const res = await getInternships(user?.email);
+      console.log(allInternships);
+      console.log(res);
+      setAllInternships(res.internships);
+    };
+
+    fillInternshipState();
   }, [loading]);
 
+  const addInternshipHandler = async (data) => {
+    await addInternship(user.email, data);
+    setAllInternships([...allInternships, data]);
+    setIsFormActive(false);
+  };
+
   return (
-    <Container maxWidth="lg" sx={{ position: "relative" }}>
+    <Container
+      maxWidth="lg"
+      sx={{
+        position: "relative",
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        flexDirection: "column",
+      }}
+    >
       <Button
         variant="contained"
         sx={{ position: "", top: 0, right: 0, marginBottom: "3em" }}
@@ -105,7 +135,9 @@ const Home = () => {
       >
         Add Internship
       </Button>
-      {isFormActive && <ApplicationForm />}
+      {isFormActive && (
+        <ApplicationForm addInternshipHandler={addInternshipHandler} />
+      )}
       <Stack spacing={2} sx={{ marginTop: "5em" }}>
         {allInternships.length == 0 && (
           <Item elevation={3}>
@@ -113,8 +145,23 @@ const Home = () => {
             Internship' Button Above
           </Item>
         )}
-        {allInternships.internships.map((item) => {
-          return <h1>Hi</h1>;
+        {allInternships?.map((item) => {
+          const {
+            applicationLink,
+            companyName,
+            companyPosition,
+            status,
+            whenApplied,
+          } = item;
+          return (
+            <ApplicationCard
+              applicationLink={applicationLink}
+              companyName={companyName}
+              companyPosition={companyPosition}
+              status={status}
+              whenApplied={whenApplied}
+            />
+          );
         })}
       </Stack>
     </Container>

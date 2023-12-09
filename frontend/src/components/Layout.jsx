@@ -40,7 +40,9 @@ const Layout = () => {
             <a href="#"> Contact</a>
           </li>
           <li>
-            <button onClick={signOut}>Sing out</button>
+            <a href="/signin">
+              <button onClick={signOut}>Sing out</button>
+            </a>
           </li>
         </ul>
         {isNavActive && (
