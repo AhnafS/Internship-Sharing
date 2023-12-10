@@ -8,7 +8,16 @@ import { useAuth } from "../auth";
 const Layout = () => {
   const [isNavActive, setIsNavActive] = useState(false);
   const [sliderValue, setSliderValue] = useState(10);
-  const { signOut } = useAuth();
+  const { signOut, user } = useAuth();
+
+  const copyEmailHandler = async () => {
+    const location = `${window.location.origin}/share/${user.email}`;
+    if ("clipboard" in navigator) {
+      return await navigator.clipboard.writeText(location);
+    } else {
+      return document.execCommand("copy", true, location);
+    }
+  };
 
   return (
     <div>
@@ -31,17 +40,19 @@ const Layout = () => {
       <nav>
         <ul>
           <li>
-            <Link to="/">Home</Link>
+            <Link to="/home">Home</Link>
           </li>
           <li>
-            <a href="#"> About</a>
+            <a href="/all-users"> All Users</a>
           </li>
           <li>
-            <a href="#"> Contact</a>
+            <a href="#" onClick={copyEmailHandler}>
+              Share Link
+            </a>
           </li>
           <li>
-            <a href="/signin">
-              <button onClick={signOut}>Sing out</button>
+            <a href="/signin" onClick={signOut}>
+              Sign out
             </a>
           </li>
         </ul>
@@ -58,6 +69,9 @@ const Layout = () => {
           </Box>
         )}
       </nav>
+      <h5 style={{ bottom: "10px", right: "10px", position: "absolute" }}>
+        Ahnaf Shamim, Ahnaf Hamim, Sulaiman Zohair, Arup Bhowmik
+      </h5>
     </div>
   );
 };

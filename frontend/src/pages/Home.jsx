@@ -84,6 +84,7 @@ const ApplicationForm = ({ addInternshipHandler }) => {
           value={formData.status}
           onChange={handleChange("status")}
         />
+
         <Button type="submit" variant="contained" color="primary" fullWidth>
           Submit
         </Button>
@@ -116,7 +117,7 @@ const Home = () => {
 
   return (
     <Container
-      maxWidth="lg"
+      maxWidth="md"
       sx={{
         position: "relative",
         display: "flex",
@@ -138,14 +139,20 @@ const Home = () => {
       {isFormActive && (
         <ApplicationForm addInternshipHandler={addInternshipHandler} />
       )}
-      <Stack spacing={2} sx={{ marginTop: "5em" }}>
+      <Stack
+        spacing={2}
+        sx={{ marginTop: "5em" }}
+        useFlexGap
+        direction="row"
+        flexWrap="wrap"
+      >
         {allInternships.length == 0 && (
           <Item elevation={3}>
             No Internships At The Moment, You Can Add It By Pressing The 'Add
             Internship' Button Above
           </Item>
         )}
-        {allInternships?.map((item) => {
+        {allInternships?.map((item, i) => {
           const {
             applicationLink,
             companyName,
@@ -155,6 +162,7 @@ const Home = () => {
           } = item;
           return (
             <ApplicationCard
+              key={i}
               applicationLink={applicationLink}
               companyName={companyName}
               companyPosition={companyPosition}

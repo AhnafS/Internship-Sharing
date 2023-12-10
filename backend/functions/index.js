@@ -19,6 +19,7 @@ const firebaseAuth = require("./express/middleware/firebase-auth");
 const getUser = require("./express/routes/get-user");
 const addInternship = require("./express/routes/add-internship");
 const getInternships = require("./express/routes/get-internships");
+const getAllInternships = require("./express/routes/get-all-internships");
 
 const app = express();
 app.use(cors());
@@ -29,5 +30,6 @@ app.post("/register", validateEmailAndPassword, register);
 app.post("/add-internship", addInternship);
 app.get("/users/:id", firebaseAuth, getUser);
 app.get("/get-internships/:email", getInternships);
+app.get("/get-all-internships", getAllInternships);
 
 exports.api = functions.https.onRequest(app);

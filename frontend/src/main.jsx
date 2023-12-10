@@ -11,6 +11,8 @@ import Layout from "./components/Layout.jsx";
 import { AuthProvider } from "./auth";
 import { initializeApp } from "firebase/app";
 import firebaseConfig from "./firebase.config";
+import Share from "./pages/Share.jsx";
+import AllUsers from "./pages/AllUsers.jsx";
 
 initializeApp(firebaseConfig);
 
@@ -23,8 +25,9 @@ ReactDOM.createRoot(document.getElementById("root")).render(
           <Route path="/signup" element={<SignUp />} />
           <Route path="/" element={<Layout />}>
             <Route index element={<App />} />
-            <Route path="home" element={<Home />} />
-            <Route path="test" element={<Test />} />
+            <Route path="/share/:email" element={<Share />}></Route>
+            <Route path="/home" element={<Home />} />
+            <Route path="/all-users" element={<AllUsers />} />
           </Route>
         </Routes>
       </BrowserRouter>

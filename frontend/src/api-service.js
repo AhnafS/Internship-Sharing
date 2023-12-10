@@ -71,3 +71,13 @@ export async function addInternship(email, internshipDetails) {
     console.log(error);
   }
 }
+
+export async function getAllUsers() {
+  const url = `${apiUrl}/get-all-internships`;
+  try {
+    const res = await axios.get(url);
+    return res.data;
+  } catch (error) {
+    console.log(error);
+  }
+}

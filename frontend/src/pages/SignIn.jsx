@@ -8,7 +8,7 @@ import {
 import { useState } from "react";
 import { useForm, Controller } from "react-hook-form";
 import isEmail from "is-email";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { useAuth } from "../auth";
 
 export default function SignIn() {
@@ -60,7 +60,8 @@ export default function SignIn() {
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
-        height: "100%",
+        height: "100vh",
+        backgroundColor: "beige",
       }}
     >
       <form
@@ -114,6 +115,11 @@ export default function SignIn() {
         <Button variant="contained" type="submit" sx={{ marginTop: 2 }}>
           Sign in
         </Button>
+        <Link to="/signup">
+          <Button variant="contained" type="submit" sx={{ marginTop: 2 }}>
+            Sign Up
+          </Button>
+        </Link>
         <Box
           sx={{
             marginTop: 2,

@@ -10,7 +10,7 @@ import { useForm, Controller } from "react-hook-form";
 
 import isEmail from "is-email";
 import { useAuth } from "../auth";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 
 export default function SignUp() {
   const {
@@ -52,10 +52,11 @@ export default function SignUp() {
   return (
     <Box
       sx={{
-        height: "100%",
+        height: "100vh",
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
+        backgroundColor: "beige",
       }}
     >
       <form
@@ -120,6 +121,11 @@ export default function SignUp() {
         <Button variant="contained" type="submit" sx={{ marginTop: 2 }}>
           Sign up
         </Button>
+        <Link to="/signin">
+          <Button variant="contained" type="submit" sx={{ marginTop: 2 }}>
+            Sign In
+          </Button>
+        </Link>
         <Box sx={{ marginTop: 2, textAlign: "center" }}>
           <Typography
             sx={{
