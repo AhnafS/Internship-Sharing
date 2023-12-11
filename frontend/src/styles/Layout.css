@@ -1,5 +1,5 @@
 @import url("https://fonts.googleapis.com/css?family=Lato&display=swap");
-
+@import url("https://unsplash.com/photos/the-sun-is-setting-over-the-desert-landscape-NvlzxCwYPjM");
 * {
   box-sizing: border-box;
 }
@@ -117,4 +117,21 @@ nav a:hover {
 .content p {
   color: #333;
   line-height: 1.5;
+}
+
+.bg {
+  background: url("https://unsplash.com/photos/the-sun-is-setting-over-the-desert-landscape-NvlzxCwYPjM")
+    no-repeat center center/cover;
+  position: absolute;
+  top: -30px;
+  left: -30px;
+  width: calc(100vw + 60px);
+  height: calc(100vh + 60px);
+  z-index: -1;
+  filter: blur(0px);
+}
+
+.loading-text {
+  font-size: 50px;
+  color: #fff;
 }
