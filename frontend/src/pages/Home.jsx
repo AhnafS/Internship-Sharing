@@ -1,4 +1,5 @@
 import { React, useState, useEffect } from "react";
+import { Box } from "@mui/material";
 import Button from "@mui/material/Button";
 import { Container } from "@mui/material";
 import Stack from "@mui/material/Stack";
@@ -8,6 +9,7 @@ import { TextField, Typography } from "@mui/material";
 import { useAuth } from "../auth";
 import { addInternship, getInternships } from "../api-service";
 import ApplicationCard from "../components/ApplicationCard";
+import WaterCupTracker from '../components/WaterCupTracker';
 
 const Item = styled(Paper)(({ theme }) => ({
   ...theme.typography.body2,
@@ -97,6 +99,7 @@ const Home = () => {
   const [isFormActive, setIsFormActive] = useState(false);
   const [allInternships, setAllInternships] = useState([]);
   const { user, loading } = useAuth();
+  const [progress, setProgress] = useState(0);
 
   useEffect(() => {
     const fillInternshipState = async () => {
@@ -113,6 +116,9 @@ const Home = () => {
     await addInternship(user.email, data);
     setAllInternships([...allInternships, data]);
     setIsFormActive(false);
+    if (progress < 4) {
+        setProgress(progress + 1);
+      }
   };
 
   return (
@@ -126,6 +132,10 @@ const Home = () => {
         flexDirection: "column",
       }}
     >
+        {/* Positioned Box with WaterCupTracker */}
+      <Box sx={{ position: 'absolute', top: 0, right: 0 }}>
+        <WaterCupTracker filled={progress} />
+      </Box>
       <Button
         variant="contained"
         sx={{ position: "", top: 0, right: 0, marginBottom: "3em" }}

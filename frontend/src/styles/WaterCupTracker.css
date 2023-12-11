@@ -1,0 +1,27 @@
+.cup-container {
+    position: absolute;
+    height: 200px;
+    width: 100px;
+    border: 2px solid #00aaff;
+    border-radius: 10px;
+    overflow: hidden; /* This will clip off any overflowing content */
+    padding-top: 30px; /* Adjust based on your design preference */
+  }
+  
+  .percentage {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    background-color: #00aaff;
+    transition: height 0.5s ease-in-out;
+    z-index: 1; /* Ensure this is below the remained div */
+  }
+  
+  .remained {
+    position: absolute;
+    top: 0;
+    width: 100%;
+    text-align: center;
+    z-index: 2; /* Ensure this is above the percentage div */
+  }
+  

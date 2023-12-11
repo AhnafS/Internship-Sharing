@@ -10,14 +10,33 @@ const Layout = () => {
   const [sliderValue, setSliderValue] = useState(10);
   const { signOut, user } = useAuth();
 
-  const copyEmailHandler = async () => {
+//   const copyEmailHandler = async () => {
+//     const location = `${window.location.origin}/share/${user.email}`;
+//     if ("clipboard" in navigator) {
+//       return await navigator.clipboard.writeText(location);
+//     } else {
+//       return document.execCommand("copy", true, location);
+//     }
+//   };
+const copyEmailHandler = async () => {
     const location = `${window.location.origin}/share/${user.email}`;
-    if ("clipboard" in navigator) {
-      return await navigator.clipboard.writeText(location);
-    } else {
-      return document.execCommand("copy", true, location);
+    try {
+      if ("clipboard" in navigator) {
+        await navigator.clipboard.writeText(location);
+        alert("Link successfully copied");
+      } else {
+        const result = document.execCommand("copy", true, location);
+        if(result) {
+          alert("Link successfully copied");
+        } else {
+          alert("Failed to copy the link");
+        }
+      }
+    } catch (error) {
+      alert("Failed to copy the link");
     }
   };
+  
 
   return (
     <div>
